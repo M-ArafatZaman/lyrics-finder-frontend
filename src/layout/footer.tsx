@@ -133,7 +133,7 @@ function Footer(): JSX.Element {
                             Mohammad Arafat Zaman &copy; {Year}
                         </Typography>
                         <Divider sx={{my: 1, borderColor: "rgba(255,255,255,0.15)"}}/>
-                        <Typography textAlign="center">
+                        <Typography variant="caption" textAlign="center" sx={{display: "block", mx: "auto"}}>
                             All rights reserved
                         </Typography>
                     </Box>
