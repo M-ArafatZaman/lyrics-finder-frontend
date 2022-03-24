@@ -5,7 +5,8 @@ import Header from './layout/header';
 import Footer from './layout/footer';
 import Loading from './layout/loading';
 import {Routes, Route} from 'react-router-dom';
-import {LazyImport} from './utils';
+import {LazyImport, FadeInWrapper} from './utils';
+//import Home from './page/Home';
 
 // Dynamically load pages
 const Home = LazyImport(() => import("./page/Home"));
@@ -40,7 +41,7 @@ function App(): JSX.Element {
             >   
                 {/* Routes */}
                 <Routes>
-                    <Route path="/" element={<React.Suspense fallback={<Loading height={ContentContainerHeight}/>} ><Home/></React.Suspense>} />
+                    <Route path="/" element={<React.Suspense fallback={<Loading height={ContentContainerHeight}/>} ><FadeInWrapper><Home/></FadeInWrapper></React.Suspense>} />
                 </Routes>
                 
             </Box>
