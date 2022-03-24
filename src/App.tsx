@@ -5,15 +5,12 @@ import Header from './layout/header';
 import Footer from './layout/footer';
 import Loading from './layout/loading';
 import {Routes, Route} from 'react-router-dom';
-
+import {LazyImport} from './utils';
 
 // Dynamically load pages
-const Home = React.lazy(async () => {
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    return import("./page/Home");
-});
+const Home = LazyImport(() => import("./page/Home"));
 
-function App() {
+function App(): JSX.Element {
 
     // Content container ref is used so that its height can be passed down to components which needs it
     const ContentContainerRef = React.useRef<HTMLDivElement | null>(null);
