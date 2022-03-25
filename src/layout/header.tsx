@@ -29,7 +29,7 @@ function Header(): JSX.Element {
 
                         {/* Name */}
                         <Box minHeight="100%" sx={{ml: 2}} alignItems="top" flexGrow={1}>
-                            <Typography variant="h5" sx={{color: "red"}}>
+                            <Typography variant="h5" sx={{color: "secondary.main"}}>
                                 LyricsFinder
                             </Typography>
                             <Typography variant="caption">
