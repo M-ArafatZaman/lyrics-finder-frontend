@@ -53,10 +53,10 @@ function Footer(): JSX.Element {
     const Year = new Date().getFullYear();
 
     return (
-        <Box sx={{
-            backgroundColor: "#2E4053",
+        <Box sx={(theme) => ({
+            backgroundColor: theme.palette.secondary.main,
             color: "#F2F3F4"
-        }}>
+        })}>
             
             <Container>
                 <Grid container spacing={1}>
