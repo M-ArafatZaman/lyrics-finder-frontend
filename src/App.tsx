@@ -53,6 +53,14 @@ function App(): JSX.Element {
                                     <FadeInWrapper><Home/></FadeInWrapper>
                                 </React.Suspense>}
                         />
+
+                        <Route 
+                            path="search-playlist/"
+                            element={
+                                <React.Suspense fallback={<Loading height={ContentContainerHeight}/>} >
+                                    <FadeInWrapper><SearchPlaylist/></FadeInWrapper>
+                                </React.Suspense>}
+                        />
                         
                     </Routes>
                     

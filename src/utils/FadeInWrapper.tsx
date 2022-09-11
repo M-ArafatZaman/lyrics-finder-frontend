@@ -16,7 +16,8 @@ const FadeIn = keyframes`
 
 
 interface FadeInWrapperProps {
-    children: JSX.Element | React.ComponentType<any>
+    //children: JSX.Element | React.ComponentType<any>
+    children: React.ReactNode
 }
 
 function FadeInWrapper(props: FadeInWrapperProps): JSX.Element {
