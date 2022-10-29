@@ -108,6 +108,16 @@ interface ScanSongAPIResponse {
     }
 }
 
+/* THE RESPONSE FROM /get-lyrics */
+interface GetLyricsAPIResponse {
+    status: number;
+    message: string;
+    data?: {
+        geniusURL: string;
+        lyrics: string;
+    }
+}
+
 
 export type {
     LoadPlaylistAPIResponse, 
