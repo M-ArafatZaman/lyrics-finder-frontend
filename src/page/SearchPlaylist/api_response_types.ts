@@ -118,6 +118,10 @@ interface GetLyricsAPIResponse {
     }
 }
 
+/* THE RESPONSE FROM /get-genius-response-time/ */
+interface GetGeniusResponseTimeAPIResponse {
+    time: number;
+}
 
 export type {
     LoadPlaylistAPIResponse, 
