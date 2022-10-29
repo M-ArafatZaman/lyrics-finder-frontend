@@ -95,6 +95,19 @@ interface LoadCompletePlaylistAPIResponse {
     };
 }
 
+/* THE RESPONSE FROM /scan-song/ */
+interface ScanSongAPIResponse {
+    status: number;
+    message: string;
+    data?: {
+        artists: string;
+        geniusURL: string;
+        lyrics: string;
+        name: string;
+        snippets: Snippet[];
+    }
+}
+
 
 export type {
     LoadPlaylistAPIResponse, 
