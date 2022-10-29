@@ -56,6 +56,45 @@ interface SearchPlaylistAPIResponse {
 }
 
 
+// UPDATED
+
+/* The items from /load-complete-playlist/ endpoint */
+interface PlaylistItems {
+    artists: string;
+    imageURL: string;
+    name: string;
+    url: string;
+}
+
+/* THE RESPONSE FROM /load-complete-playlist/ */
+interface LoadCompletePlaylistAPIResponse {
+    status: number;
+    message: string;
+    data?: {
+        has_all_tracks: boolean;
+        items: PlaylistItems[];
+        playlist: {
+            description: string;
+            external_urls: {
+                spotify: string;
+            };
+            followers: {
+                total: number;
+            };
+            images: SpotifyImageResponse[];
+            name: string;
+            owner: {
+                images: SpotifyImageResponse[];
+                name: string;
+                url: string;
+            };
+            tracks: {
+                total: number;
+            }
+        }
+    };
+}
+
 
 export type {
     LoadPlaylistAPIResponse, 
