@@ -78,27 +78,4 @@ function ListSongs(props: ListSongsProps) {
     )
 };
 
-// The prop type of ListSongItem component
-interface ListSongItemProps {
-    artists: string;
-    imageURL: string;
-    name: string;
-    url: string;
-}
-
-// The list songs item component
-function ListSongItem(props: ListSongItemProps) {
-    /* 
-    The function component which renders EACH song in the listSonsg component
-    */
-   const {artists, imageURL, name, url} = props;
-
-    return (
-        <ListItem>
-
-        </ListItem>
-    )
-
-}
-
 export default ListSongs;
