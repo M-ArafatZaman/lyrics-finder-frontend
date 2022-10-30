@@ -3,7 +3,7 @@ import {_parseGetQueryToURLQuery, QueryObject, onEnter} from '../../utils';
 import {API_WEBSITE, SEARCH_PLAYLIST_ENDPOINT, GET_GENIUS_RESPONSE_TIME} from './endpoints';
 import {SnackbarStateInterface} from './index';
 import { useTheme, SxProps } from '@mui/material/styles';
-import { SearchPlaylistAPIResponse } from './api_response_types';
+import { SearchPlaylistAPIResponse, LoadCompletePlaylistAPIResponse } from './api_response_types';
 // MUI components
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -15,16 +15,18 @@ import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress from '@mui/material/LinearProgress';
 // Page components
 import EstimatedTimeRemaining from './EstimatedTimeRemaining';
+import ListSongs from './ListSongs';
 
 interface SearchPlaylistDetailsInterface {
     playlistURL: string;
     showSnackbar: (newState: Partial<SnackbarStateInterface>) => void;
     setSearchResults: React.Dispatch<React.SetStateAction<SearchPlaylistAPIResponse>>;
     totalSongs: number | undefined;
+    completePlaylistResponse: LoadCompletePlaylistAPIResponse;
 }
 
 function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Element {
-    const {playlistURL, showSnackbar, setSearchResults, totalSongs} = props;
+    const {playlistURL, showSnackbar, setSearchResults, totalSongs, completePlaylistResponse} = props;
 
     const [keywords, setKeywords] = React.useState<string>("");
 
@@ -129,6 +131,14 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
                     }}
                     onKeyDown={onEnter((e) => { searchPlaylist(e) })}
                 />
+            </Box>
+            
+            {/* List of songs */}
+            <Box>
+                {
+                    completePlaylistResponse.data?.items && 
+                    (<ListSongs items={completePlaylistResponse.data?.items}/>)
+                }
             </Box>
 
             {/* Search button */}

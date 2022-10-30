@@ -214,6 +214,7 @@ function SearchPlaylist(): JSX.Element {
                                                 playlistURL={PLAYLIST_URL}
                                                 showSnackbar={showSnackbar}
                                                 setSearchResults={setSearchResults}
+                                                completePlaylistResponse={completePlaylistDetails}
                                                 totalSongs={undefined}
                                             />
                                         </React.Fragment>
