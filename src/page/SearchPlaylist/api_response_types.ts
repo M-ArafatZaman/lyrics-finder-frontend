@@ -132,5 +132,6 @@ export type {
     LoadCompletePlaylistAPIResponse,
     ScanSongAPIResponse,
     GetLyricsAPIResponse,
-    GetGeniusResponseTimeAPIResponse
+    GetGeniusResponseTimeAPIResponse,
+    PlaylistItems
 };
