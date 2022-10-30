@@ -3,7 +3,7 @@ import {_parseGetQueryToURLQuery, QueryObject, onEnter} from '../../utils';
 import {API_WEBSITE, LOAD_PLAYLIST_ENDPOINT, LOAD_COMPLETE_PLAYLIST_ENDPOINT} from './endpoints';
 import {SnackbarStateInterface} from './index';
 import { useTheme, SxProps } from '@mui/material/styles';
-import { LoadPlaylistAPIResponse, LoadCompletePlaylistAPIResponse } from './api_response_types';
+import { LoadCompletePlaylistAPIResponse } from './api_response_types';
 // MUI components
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -18,7 +18,6 @@ interface LoadPlaylistProps {
     playlistURL: string;
     setPlaylistURL: React.Dispatch<React.SetStateAction<string>>;
     showSnackbar: (P: Partial<SnackbarStateInterface>) => void;
-    setPlaylistDetails: React.Dispatch<React.SetStateAction<LoadPlaylistAPIResponse>>;
     setCompletePlaylistDetails: React.Dispatch<React.SetStateAction<LoadCompletePlaylistAPIResponse>>;
 }
 
@@ -26,7 +25,7 @@ interface LoadPlaylistProps {
  This is the LoadPlaylist step in the 3 steps
 */
 function LoadPlaylist(props: LoadPlaylistProps): JSX.Element {
-    const {playlistURL, setPlaylistURL, showSnackbar, setPlaylistDetails, setCompletePlaylistDetails} = props;
+    const {playlistURL, setPlaylistURL, showSnackbar, setCompletePlaylistDetails} = props;
     
 
     // Whenever a request is in progress

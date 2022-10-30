@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SxProps } from '@mui/material/styles';
-import { LoadPlaylistAPIResponse, LoadCompletePlaylistAPIResponse } from './api_response_types';
+import {LoadCompletePlaylistAPIResponse } from './api_response_types';
 // MUI components
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -11,28 +11,12 @@ import { grey } from '@mui/material/colors';
 import PersonIcon from '@mui/icons-material/Person';
 
 interface DisplayPlaylistDetailsInterface {
-    playlistDetails: LoadPlaylistAPIResponse;
     completePlaylistDetails: LoadCompletePlaylistAPIResponse;
 }
 
 function DisplayPlaylistDetails(props: DisplayPlaylistDetailsInterface): JSX.Element {
-    const {playlistDetails, completePlaylistDetails} = props;
+    const {completePlaylistDetails} = props;
 
-    /* // Extract details from playlistDetail
-    const playlistImage = (typeof playlistDetails.data?.images[0].url !== "undefined") ? playlistDetails.data?.images[0].url : "";
-    const playlistExternalSpotifyURL = (typeof playlistDetails.data?.external_urls.spotify !== "undefined") ? playlistDetails.data?.external_urls.spotify : "";
-    const playlistName = (typeof playlistDetails.data?.name !== "undefined") ? playlistDetails.data?.name : "";
-    const playlistDescription = (typeof playlistDetails.data?.description !== "undefined") ? playlistDetails.data?.description : "";
-    const playlistOwnerName = (typeof playlistDetails.data?.owner.name !== "undefined") ? playlistDetails.data?.owner.name : "";
-    const playlistOwnerURL = (typeof playlistDetails.data?.owner.url !== "undefined") ? playlistDetails.data?.owner.url : "";
-    const playlistFollowers = (typeof playlistDetails.data?.followers.total !== "undefined") ? playlistDetails.data?.followers.total : "";
-    const playlistSongs = (typeof playlistDetails.data?.tracks.total !== "undefined") ? playlistDetails.data?.tracks.total : "";
-
-    // If playlist images list is empty, append an empty url
-    let playlistOwnerImages: {url: string}[] = (typeof playlistDetails.data?.owner.images !== "undefined") ? playlistDetails.data?.owner.images : [];
-    if (playlistOwnerImages.length === 0) {
-        playlistOwnerImages[playlistOwnerImages.length] = {url: ""};
-    } */
 
     let playlistImage: string, playlistExternalSpotifyURL: string, playlistName: string, playlistDescription: string, playlistOwnerName: string, playlistOwnerURL: string, playlistFollowers: number, playlistSongs: number, playlistOwnerImages: {url: string}[];
 

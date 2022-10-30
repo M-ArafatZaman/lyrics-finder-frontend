@@ -61,25 +61,13 @@ function SearchPlaylist(): JSX.Element {
 
     //  ========================== APP DATA ==================================
     const [PLAYLIST_URL, SET_PLAYLIST_URL] = useState<string>("");
-    const [playlistDetails, setPlaylistDetails] = useState<LoadPlaylistAPIResponse>({} as LoadPlaylistAPIResponse);
+    //const [playlistDetails, setPlaylistDetails] = useState<LoadPlaylistAPIResponse>({} as LoadPlaylistAPIResponse);
     const [completePlaylistDetails, setCompletePlaylistDetails] = useState<LoadCompletePlaylistAPIResponse>(
         {} as LoadCompletePlaylistAPIResponse
     );
     const [searchResults, setSearchResults] = useState<SearchPlaylistAPIResponse>({} as SearchPlaylistAPIResponse);
 
     // Listen for updates, and move on to the next step if we receive some data
-    // For step 1
-    useEffect(() => {
-        // The "data" key contains the main data
-        if ("data" in playlistDetails) {
-            setActiveStep(1);
-            setStepStatus({
-                ...stepStatus,
-                loadPlaylist: true
-            } as stepStatusInterface);
-
-        }
-    }, [playlistDetails]);
     // For step 1 {UPDATED}
     useEffect(() => {
         // Update state if data is in the return data from API
@@ -111,7 +99,6 @@ function SearchPlaylist(): JSX.Element {
     const [activeStep, setActiveStep] = useState<STEPS>(0);
     // stepStatus state contains the status (completed or not) of every step
     interface stepStatusInterface {
-        loadPlaylist: boolean;
         searchResults: boolean;
         // Updated
         loadCompletePlaylist: boolean;
@@ -119,7 +106,6 @@ function SearchPlaylist(): JSX.Element {
     // This step status is for indicating the <Stepper/> content ONLY
     // Only activeStep is used for determing which content to render
     const [stepStatus, setStepStatus] = useState<stepStatusInterface>({
-        loadPlaylist: false,
         searchResults: false,
         // Update
         loadCompletePlaylist: false
@@ -136,10 +122,8 @@ function SearchPlaylist(): JSX.Element {
             setActiveStep(0);
             setStepStatus({
                 ...stepStatus,
-                loadPlaylist: false,
                 loadCompletePlaylist: false
             } as stepStatusInterface);
-            setPlaylistDetails({} as LoadPlaylistAPIResponse);
             setCompletePlaylistDetails({} as LoadCompletePlaylistAPIResponse);
         }
 
@@ -212,7 +196,6 @@ function SearchPlaylist(): JSX.Element {
                                             playlistURL={PLAYLIST_URL}
                                             setPlaylistURL={SET_PLAYLIST_URL}
                                             showSnackbar={showSnackbar}
-                                            setPlaylistDetails={setPlaylistDetails}
                                             setCompletePlaylistDetails={setCompletePlaylistDetails}
                                         />
                                     </FadeInWrapper>
@@ -225,14 +208,13 @@ function SearchPlaylist(): JSX.Element {
                                     <FadeInWrapper>
                                         <React.Fragment>
                                             <DisplayPlaylistDetails
-                                                playlistDetails={playlistDetails}
                                                 completePlaylistDetails={completePlaylistDetails}
                                             />
                                             <SearchPlaylistDetails
                                                 playlistURL={PLAYLIST_URL}
                                                 showSnackbar={showSnackbar}
                                                 setSearchResults={setSearchResults}
-                                                totalSongs={playlistDetails.data?.tracks.total}
+                                                totalSongs={undefined}
                                             />
                                         </React.Fragment>
                                     </FadeInWrapper>
@@ -245,7 +227,6 @@ function SearchPlaylist(): JSX.Element {
                                     <FadeInWrapper>
                                         <React.Fragment>
                                             <DisplayPlaylistDetails
-                                                playlistDetails={playlistDetails}
                                                 completePlaylistDetails={completePlaylistDetails}
                                             />
                                             <SearchResults
