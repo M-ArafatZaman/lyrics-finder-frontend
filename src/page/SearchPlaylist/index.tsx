@@ -62,6 +62,9 @@ function SearchPlaylist(): JSX.Element {
     //  ========================== APP DATA ==================================
     const [PLAYLIST_URL, SET_PLAYLIST_URL] = useState<string>("");
     const [playlistDetails, setPlaylistDetails] = useState<LoadPlaylistAPIResponse>({} as LoadPlaylistAPIResponse);
+    const [completePlaylistDetails, setCompletePlaylistDetails] = useState<LoadCompletePlaylistAPIResponse>(
+        {} as LoadCompletePlaylistAPIResponse
+    );
     const [searchResults, setSearchResults] = useState<SearchPlaylistAPIResponse>({} as SearchPlaylistAPIResponse);
 
     // Listen for updates, and move on to the next step if we receive some data
@@ -77,6 +80,17 @@ function SearchPlaylist(): JSX.Element {
 
         }
     }, [playlistDetails]);
+    // For step 1 {UPDATED}
+    useEffect(() => {
+        // Update state if data is in the return data from API
+        if ("data" in completePlaylistDetails) {
+            setActiveStep(1);
+            setStepStatus({
+                ...stepStatus,
+                loadCompletePlaylist: true
+            } as stepStatusInterface);
+        };
+    }, [completePlaylistDetails])
 
     // For step 2
     useEffect(() => {
@@ -99,12 +113,16 @@ function SearchPlaylist(): JSX.Element {
     interface stepStatusInterface {
         loadPlaylist: boolean;
         searchResults: boolean;
+        // Updated
+        loadCompletePlaylist: boolean;
     }
     // This step status is for indicating the <Stepper/> content ONLY
     // Only activeStep is used for determing which content to render
     const [stepStatus, setStepStatus] = useState<stepStatusInterface>({
         loadPlaylist: false,
-        searchResults: false
+        searchResults: false,
+        // Update
+        loadCompletePlaylist: false
     });
 
     const isStepperContentInDisplay = (id: STEPS): boolean => activeStep == id;
@@ -118,9 +136,11 @@ function SearchPlaylist(): JSX.Element {
             setActiveStep(0);
             setStepStatus({
                 ...stepStatus,
-                loadPlaylist: false
+                loadPlaylist: false,
+                loadCompletePlaylist: false
             } as stepStatusInterface);
             setPlaylistDetails({} as LoadPlaylistAPIResponse);
+            setCompletePlaylistDetails({} as LoadCompletePlaylistAPIResponse);
         }
 
         // If in 3rd step
@@ -157,7 +177,7 @@ function SearchPlaylist(): JSX.Element {
                         <Box my={2}>
                             <Stepper activeStep={activeStep}>
                                 {/* First step - Load playlist */}
-                                <Step completed={stepStatus.loadPlaylist}>
+                                <Step completed={stepStatus.loadCompletePlaylist}>
                                     {/* Label */}
                                     <StepLabel>
                                         Load a playlist
@@ -193,6 +213,7 @@ function SearchPlaylist(): JSX.Element {
                                             setPlaylistURL={SET_PLAYLIST_URL}
                                             showSnackbar={showSnackbar}
                                             setPlaylistDetails={setPlaylistDetails}
+                                            setCompletePlaylistDetails={setCompletePlaylistDetails}
                                         />
                                     </FadeInWrapper>
                                 )
@@ -205,6 +226,7 @@ function SearchPlaylist(): JSX.Element {
                                         <React.Fragment>
                                             <DisplayPlaylistDetails
                                                 playlistDetails={playlistDetails}
+                                                completePlaylistDetails={completePlaylistDetails}
                                             />
                                             <SearchPlaylistDetails
                                                 playlistURL={PLAYLIST_URL}
@@ -224,6 +246,7 @@ function SearchPlaylist(): JSX.Element {
                                         <React.Fragment>
                                             <DisplayPlaylistDetails
                                                 playlistDetails={playlistDetails}
+                                                completePlaylistDetails={completePlaylistDetails}
                                             />
                                             <SearchResults
                                                 searchResults={searchResults}

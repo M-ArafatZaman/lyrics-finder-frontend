@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SxProps } from '@mui/material/styles';
-import { LoadPlaylistAPIResponse } from './api_response_types';
+import { LoadPlaylistAPIResponse, LoadCompletePlaylistAPIResponse } from './api_response_types';
 // MUI components
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -12,12 +12,13 @@ import PersonIcon from '@mui/icons-material/Person';
 
 interface DisplayPlaylistDetailsInterface {
     playlistDetails: LoadPlaylistAPIResponse;
+    completePlaylistDetails: LoadCompletePlaylistAPIResponse;
 }
 
 function DisplayPlaylistDetails(props: DisplayPlaylistDetailsInterface): JSX.Element {
-    const {playlistDetails} = props;
+    const {playlistDetails, completePlaylistDetails} = props;
 
-    // Extract details from playlistDetail
+    /* // Extract details from playlistDetail
     const playlistImage = (typeof playlistDetails.data?.images[0].url !== "undefined") ? playlistDetails.data?.images[0].url : "";
     const playlistExternalSpotifyURL = (typeof playlistDetails.data?.external_urls.spotify !== "undefined") ? playlistDetails.data?.external_urls.spotify : "";
     const playlistName = (typeof playlistDetails.data?.name !== "undefined") ? playlistDetails.data?.name : "";
@@ -31,6 +32,38 @@ function DisplayPlaylistDetails(props: DisplayPlaylistDetailsInterface): JSX.Ele
     let playlistOwnerImages: {url: string}[] = (typeof playlistDetails.data?.owner.images !== "undefined") ? playlistDetails.data?.owner.images : [];
     if (playlistOwnerImages.length === 0) {
         playlistOwnerImages[playlistOwnerImages.length] = {url: ""};
+    } */
+
+    let playlistImage: string, playlistExternalSpotifyURL: string, playlistName: string, playlistDescription: string, playlistOwnerName: string, playlistOwnerURL: string, playlistFollowers: number, playlistSongs: number, playlistOwnerImages: {url: string}[];
+
+    // Extract details from completePlaylistDetails
+    if ((typeof completePlaylistDetails.data?.playlist !== "undefined")) {
+        playlistImage = completePlaylistDetails.data.playlist.images[0].url;
+        playlistExternalSpotifyURL = completePlaylistDetails.data.playlist.external_urls.spotify;
+        playlistName = completePlaylistDetails.data.playlist.name;
+        playlistDescription = completePlaylistDetails.data.playlist.description;
+        playlistOwnerName = completePlaylistDetails.data.playlist.owner.name;
+        playlistOwnerURL = completePlaylistDetails.data.playlist.owner.url;
+        playlistFollowers = completePlaylistDetails.data.playlist.followers.total;
+        playlistSongs = completePlaylistDetails.data.playlist.tracks.total;
+        playlistOwnerImages = completePlaylistDetails.data.playlist.owner.images;
+        
+        // Just make sure that there is ATLEAST one url
+        if (playlistOwnerImages.length === 0) {
+            playlistOwnerImages = [{url: ""}];
+        }
+
+    } else {
+        playlistImage = "";
+        playlistExternalSpotifyURL =  "";
+        playlistName = "";
+        playlistDescription = "";
+        playlistOwnerName = "";
+        playlistOwnerURL = "";
+        playlistFollowers = 0;
+        playlistSongs = 0;
+        playlistOwnerImages = [{url: ""}];
+        
     }
 
 

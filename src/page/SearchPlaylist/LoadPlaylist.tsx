@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {_parseGetQueryToURLQuery, QueryObject, onEnter} from '../../utils';
-import {API_WEBSITE, LOAD_PLAYLIST_ENDPOINT} from './endpoints';
+import {API_WEBSITE, LOAD_PLAYLIST_ENDPOINT, LOAD_COMPLETE_PLAYLIST_ENDPOINT} from './endpoints';
 import {SnackbarStateInterface} from './index';
 import { useTheme, SxProps } from '@mui/material/styles';
-import { LoadPlaylistAPIResponse } from './api_response_types';
+import { LoadPlaylistAPIResponse, LoadCompletePlaylistAPIResponse } from './api_response_types';
 // MUI components
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -19,13 +19,14 @@ interface LoadPlaylistProps {
     setPlaylistURL: React.Dispatch<React.SetStateAction<string>>;
     showSnackbar: (P: Partial<SnackbarStateInterface>) => void;
     setPlaylistDetails: React.Dispatch<React.SetStateAction<LoadPlaylistAPIResponse>>;
+    setCompletePlaylistDetails: React.Dispatch<React.SetStateAction<LoadCompletePlaylistAPIResponse>>;
 }
 
 /* 
  This is the LoadPlaylist step in the 3 steps
 */
 function LoadPlaylist(props: LoadPlaylistProps): JSX.Element {
-    const {playlistURL, setPlaylistURL, showSnackbar, setPlaylistDetails} = props;
+    const {playlistURL, setPlaylistURL, showSnackbar, setPlaylistDetails, setCompletePlaylistDetails} = props;
     
 
     // Whenever a request is in progress
@@ -65,7 +66,8 @@ function LoadPlaylist(props: LoadPlaylistProps): JSX.Element {
         // Convery query from an object to a url string
         const _query: string = _parseGetQueryToURLQuery(QUERY);
         
-        const URL = `${API_WEBSITE}${LOAD_PLAYLIST_ENDPOINT}?${_query}`;
+        //const URL = `${API_WEBSITE}${LOAD_PLAYLIST_ENDPOINT}?${_query}`;
+        const URL = `${API_WEBSITE}${LOAD_COMPLETE_PLAYLIST_ENDPOINT}?${_query}`;
 
         // Send the fetch request
         fetch(URL, {
@@ -77,7 +79,8 @@ function LoadPlaylist(props: LoadPlaylistProps): JSX.Element {
             // Successfully received a response from server
             if (response.status === 200) {
                 // Successfully received data
-                setPlaylistDetails(response as LoadPlaylistAPIResponse);
+                //setPlaylistDetails(response as LoadPlaylistAPIResponse);
+                setCompletePlaylistDetails(response as LoadCompletePlaylistAPIResponse);
                 showSnackbar({
                     message: response.message,
                     severity: "success"
