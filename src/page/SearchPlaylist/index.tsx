@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FadeInWrapper} from '../../utils';
-import {LoadPlaylistAPIResponse, SearchPlaylistAPIResponse, LoadCompletePlaylistAPIResponse, ScanSongAPIResponse} from './api_response_types';
+import {SearchPlaylistAPIResponse, LoadCompletePlaylistAPIResponse, ScanSongAPIResponse} from './api_response_types';
 // MUI components
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
