@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FadeInWrapper} from '../../utils';
-import {LoadPlaylistAPIResponse, SearchPlaylistAPIResponse} from './api_response_types';
+import {LoadPlaylistAPIResponse, SearchPlaylistAPIResponse, LoadCompletePlaylistAPIResponse, ScanSongAPIResponse} from './api_response_types';
 // MUI components
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -100,6 +100,8 @@ function SearchPlaylist(): JSX.Element {
         loadPlaylist: boolean;
         searchResults: boolean;
     }
+    // This step status is for indicating the <Stepper/> content ONLY
+    // Only activeStep is used for determing which content to render
     const [stepStatus, setStepStatus] = useState<stepStatusInterface>({
         loadPlaylist: false,
         searchResults: false
