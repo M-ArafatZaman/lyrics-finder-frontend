@@ -128,5 +128,9 @@ export type {
     SpotifyImageResponse, 
     SearchPlaylistAPIResponse,
     Track,
-    Snippet
+    Snippet,
+    LoadCompletePlaylistAPIResponse,
+    ScanSongAPIResponse,
+    GetLyricsAPIResponse,
+    GetGeniusResponseTimeAPIResponse
 };
