@@ -15,6 +15,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import StorageIcon from '@mui/icons-material/Storage';
+import LaptopMacIcon from '@mui/icons-material/LaptopMac';
 import {SvgIconProps} from '@mui/material';
 
 // Type for LinkComponent props
@@ -96,6 +97,11 @@ function Footer(): JSX.Element {
                                         href="https://github.com/M-ArafatZaman/lyrics-finder-api"
                                         label="Flask Backend"
                                         icon={<StorageIcon/>}
+                                    />
+                                    <LinkComponent
+                                        href=""
+                                        label="Typescript frontend"
+                                        icon={<LaptopMacIcon/>}
                                     />
                                 </Box>
                                 
