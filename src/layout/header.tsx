@@ -10,7 +10,6 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -80,7 +79,7 @@ function Header(): JSX.Element {
                             onClose={handleClose}
                         >   
                             {/* The python CLI */}
-                            <MenuItem>
+                            <MenuItem dense={true} disableGutters={true}>
                                 <ListItem>
                                     <ListItemIcon>
                                         <AccountTreeIcon/>
@@ -92,7 +91,7 @@ function Header(): JSX.Element {
                             </MenuItem>
 
                             {/* The flask backend */}
-                            <MenuItem>
+                            <MenuItem dense={true} disableGutters={true}>
                                 <ListItem>
                                     <ListItemIcon>
                                         <StorageIcon/>
@@ -103,8 +102,8 @@ function Header(): JSX.Element {
                                 </ListItem>
                             </MenuItem>
 
-                            {/* The python CLI */}
-                            <MenuItem>
+                            {/* The Typescript frontend */}
+                            <MenuItem dense={true} disableGutters={true}>
                                 <ListItem>
                                     <ListItemIcon>
                                         <LaptopMacIcon/>
