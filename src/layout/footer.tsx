@@ -95,7 +95,7 @@ function Footer(): JSX.Element {
                                     />
                                     <LinkComponent 
                                         href="https://github.com/M-ArafatZaman/lyrics-finder-api"
-                                        label="Flask Backend"
+                                        label="Flask backend"
                                         icon={<StorageIcon/>}
                                     />
                                     <LinkComponent
