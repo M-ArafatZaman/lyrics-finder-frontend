@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
@@ -79,40 +80,36 @@ function Header(): JSX.Element {
                             onClose={handleClose}
                         >   
                             {/* The python CLI */}
-                            <MenuItem dense={true} disableGutters={true}>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <AccountTreeIcon/>
-                                    </ListItemIcon>
-                                    <ListItemText>
-                                        Python CLI
-                                    </ListItemText>
-                                </ListItem>
-                            </MenuItem>
+                            <ListItemButton dense={true}>
+                                <ListItemIcon>
+                                    <AccountTreeIcon/>
+                                </ListItemIcon>
+                                <ListItemText>
+                                    Python CLI
+                                </ListItemText>
+                            </ListItemButton>
+                            
 
                             {/* The flask backend */}
-                            <MenuItem dense={true} disableGutters={true}>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <StorageIcon/>
-                                    </ListItemIcon>
-                                    <ListItemText>
-                                        Flask backend
-                                    </ListItemText>
-                                </ListItem>
-                            </MenuItem>
+                            <ListItemButton dense={true}>
+                                <ListItemIcon>
+                                    <StorageIcon/>
+                                </ListItemIcon>
+                                <ListItemText>
+                                    Flask backend
+                                </ListItemText>
+                            </ListItemButton>
 
                             {/* The Typescript frontend */}
-                            <MenuItem dense={true} disableGutters={true}>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <LaptopMacIcon/>
-                                    </ListItemIcon>
-                                    <ListItemText>
-                                        Typescript frontend
-                                    </ListItemText>
-                                </ListItem>
-                            </MenuItem>
+                            <ListItemButton dense={true}>
+                                <ListItemIcon>
+                                    <LaptopMacIcon/>
+                                </ListItemIcon>
+                                <ListItemText>
+                                    Typescript frontend
+                                </ListItemText>
+                            </ListItemButton>
+                        
                         </Menu>
                 
                     </Toolbar>
