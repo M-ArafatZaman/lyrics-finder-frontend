@@ -112,7 +112,7 @@ function Footer(): JSX.Element {
                                         icon={<LinkedInIcon sx={{color: "#0a66c2"}}/>}
                                     />
                                     <LinkComponent
-                                        href="https://www.facebook.com/arafat.zaman.581187"
+                                        href="https://www.facebook.com/mdarafatzaman01/"
                                         label="Facebook"
                                         icon={<FacebookIcon sx={{color: "#3391ff"}} />}
                                     />
