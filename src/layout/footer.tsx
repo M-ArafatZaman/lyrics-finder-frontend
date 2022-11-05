@@ -13,6 +13,7 @@ import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import TwitterIcon from '@mui/icons-material/Twitter';
 import {SvgIconProps} from '@mui/material';
 
 // Type for LinkComponent props
@@ -115,6 +116,11 @@ function Footer(): JSX.Element {
                                         href="https://www.facebook.com/mdarafatzaman01/"
                                         label="Facebook"
                                         icon={<FacebookIcon sx={{color: "#3391ff"}} />}
+                                    />
+                                    <LinkComponent
+                                        href="https://twitter.com/mdarafatzaman11"
+                                        label="Twitter"
+                                        icon={<TwitterIcon sx={{color: "#1DA1F2"}} />}
                                     />
                                     <LinkComponent
                                         href="https://www.instagram.com/mohammadarafatzaman/"
