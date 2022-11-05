@@ -47,7 +47,13 @@ function Home(): JSX.Element {
                     </Box>
                     <Box pl={3}>
                         <Typography>
-                            - <Link href="https://github.com/M-ArafatZaman/LyricsFinder/" target="_blank">LyricsFinder Python CLI</Link>
+                            - <Link href="https://github.com/M-ArafatZaman/LyricsFinder/" target="_blank">Python CLI</Link>
+                        </Typography>
+                        <Typography>
+                            - <Link href="https://github.com/M-ArafatZaman/LyricsFinder/" target="_blank">Flask backend</Link>
+                        </Typography>
+                        <Typography>
+                            - <Link href="https://github.com/M-ArafatZaman/LyricsFinder/" target="_blank">Typescript frontend</Link>
                         </Typography>
                     </Box>
                 </Paper>
