@@ -89,7 +89,7 @@ function Footer(): JSX.Element {
                                 <Box ml={4} my={1}>
                                     <LinkComponent
                                         href="https://github.com/M-ArafatZaman/LyricsFinder"
-                                        label="LyricsFinder Python CLI"
+                                        label="Python CLI"
                                         icon={<AccountTreeIcon/>}
                                     />
                                     <LinkComponent 
