@@ -52,7 +52,7 @@ function Header(): JSX.Element {
                                 LyricsFinder
                             </Typography>
                             <Typography variant="caption">
-                                Powered by Spotify and Genius API
+                                See the Lyrics. Feel the Shine.
                             </Typography>
                         </Box>
 
