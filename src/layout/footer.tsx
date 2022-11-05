@@ -99,7 +99,7 @@ function Footer(): JSX.Element {
                                         icon={<StorageIcon/>}
                                     />
                                     <LinkComponent
-                                        href=""
+                                        href="https://github.com/M-ArafatZaman/lyrics-finder-frontend"
                                         label="Typescript frontend"
                                         icon={<LaptopMacIcon/>}
                                     />
