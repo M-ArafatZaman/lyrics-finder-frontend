@@ -9,8 +9,6 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -80,7 +78,7 @@ function Header(): JSX.Element {
                             onClose={handleClose}
                         >   
                             {/* The python CLI */}
-                            <ListItemButton dense={true}>
+                            <ListItemButton dense={true} href="https://github.com/M-ArafatZaman/LyricsFinder" target="_blank">
                                 <ListItemIcon>
                                     <AccountTreeIcon/>
                                 </ListItemIcon>
@@ -91,7 +89,7 @@ function Header(): JSX.Element {
                             
 
                             {/* The flask backend */}
-                            <ListItemButton dense={true}>
+                            <ListItemButton dense={true}href="https://github.com/M-ArafatZaman/lyrics-finder-api" target="_blank">
                                 <ListItemIcon>
                                     <StorageIcon/>
                                 </ListItemIcon>
@@ -101,7 +99,7 @@ function Header(): JSX.Element {
                             </ListItemButton>
 
                             {/* The Typescript frontend */}
-                            <ListItemButton dense={true}>
+                            <ListItemButton dense={true} href="https://github.com/M-ArafatZaman/lyrics-finder-frontend" target="_blank">
                                 <ListItemIcon>
                                     <LaptopMacIcon/>
                                 </ListItemIcon>
