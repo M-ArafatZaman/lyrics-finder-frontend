@@ -67,7 +67,7 @@ function ListSongs(props: ListSongsProps) {
                             </Button>
 
                             <br/>
-                            {(i !== (items.length-1) && <Divider sx={{my: 1}} />)}
+                            {(i !== (items.length-1) && <Divider sx={{mt: 1}} />)}
                             </>
                         </ListItemText>
                     </ListItem>
