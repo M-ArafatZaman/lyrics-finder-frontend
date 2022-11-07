@@ -13,6 +13,8 @@ import GREY from '@mui/material/colors/grey';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
+import LyricsIcon from '@mui/icons-material/Lyrics';
+
 
 // The list songs props types
 interface ListSongsProps {
@@ -51,20 +53,37 @@ function ListSongs(props: ListSongsProps) {
                             <Typography variant="body2" color="textSecondary">{each.artists}</Typography>
                             <br/>
                             {/* Buttons */}
-                            <Button
-                                startIcon={<Icon className="fab fa-spotify" />}
-                                sx={{
-                                    backgroundColor: "#1db954",
-                                    ':hover': {
-                                        backgroundColor: "#13823A"
-                                    }
-                                }}
-                                variant="contained"
-                                href={each.url}
-                                target="_blank"
-                            >
-                                Listen on Spotify
-                            </Button>
+                            {/* Listen to spotify button */}
+                            <Box mb={1}>
+                                <Button
+                                    startIcon={<Icon className="fab fa-spotify" />}
+                                    sx={{
+                                        backgroundColor: "#1db954",
+                                        ':hover': {
+                                            backgroundColor: "#13823A"
+                                        }
+                                    }}
+                                    variant="contained"
+                                    href={each.url}
+                                    target="_blank"
+                                >
+                                    Listen on Spotify
+                                </Button>
+                            </Box>
+                            {/* View Lyrics button - opens a modal */}
+                            <Box>
+                                <Button
+                                    startIcon={<LyricsIcon />}
+                                    sx={{
+                                        backgroundColor: "#767676",
+                                        ":hover": {
+                                            backgroundColor: "#515151"
+                                        }
+                                    }}
+                                    color="primary"
+                                    variant="contained"
+                                >View lyrics</Button>
+                            </Box>
 
                             <br/>
                             {(i !== (items.length-1) && <Divider sx={{mt: 1}} />)}
