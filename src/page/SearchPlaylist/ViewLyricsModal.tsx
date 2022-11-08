@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import CloseIcon from '@mui/icons-material/Close';
+import Skeleton from '@mui/material/Skeleton';
 
 // Function props
 interface ViewLyricsModalProps {
@@ -45,6 +46,19 @@ function ViewLyricsModal(props: ViewLyricsModalProps) {
                 <Divider sx={{mt: 1, mb: 2}} />
                 {/* Song name */}
                 <Typography variant="h5" textAlign="center" sx={{my: 1}}>{songName} - {artists}</Typography>
+
+                {/* Skeleton */}
+                {[1,2,3].map((e, i) => (
+                    <Box key={i}>
+                        <Skeleton animation="wave" height={26} width={150} />
+                        <Skeleton animation="wave" height={26} width={350} />
+                        <Skeleton animation="wave" height={26} width={400} />
+                        <Skeleton animation="wave" height={26} width={350} />
+                        <Skeleton animation="wave" height={26} width={400} />
+                        <br/>
+                    </Box>
+                ))}
+
                  
                 {/* Lyrics */}
                 {/* <Box sx={{backgroundColor: "#E3E3E3", p: 1}}>
