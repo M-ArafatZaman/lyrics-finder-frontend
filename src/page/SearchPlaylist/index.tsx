@@ -215,7 +215,6 @@ function SearchPlaylist(): JSX.Element {
                                                 showSnackbar={showSnackbar}
                                                 setSearchResults={setSearchResults}
                                                 completePlaylistResponse={completePlaylistDetails}
-                                                totalSongs={undefined}
                                             />
                                         </React.Fragment>
                                     </FadeInWrapper>

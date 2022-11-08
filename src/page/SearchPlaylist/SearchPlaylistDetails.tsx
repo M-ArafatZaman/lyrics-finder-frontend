@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {_parseGetQueryToURLQuery, QueryObject, onEnter} from '../../utils';
-import {API_WEBSITE, SEARCH_PLAYLIST_ENDPOINT, GET_GENIUS_RESPONSE_TIME} from './endpoints';
+import {API_WEBSITE, SEARCH_PLAYLIST_ENDPOINT, GET_GENIUS_RESPONSE_TIME, SCAN_SONG_ENDPOINT} from './endpoints';
 import {SnackbarStateInterface} from './index';
 import { useTheme, SxProps } from '@mui/material/styles';
-import { SearchPlaylistAPIResponse, LoadCompletePlaylistAPIResponse } from './api_response_types';
+import { SearchPlaylistAPIResponse, LoadCompletePlaylistAPIResponse, ScanSongAPIResponse } from './api_response_types';
 // MUI components
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -21,14 +21,16 @@ interface SearchPlaylistDetailsInterface {
     playlistURL: string;
     showSnackbar: (newState: Partial<SnackbarStateInterface>) => void;
     setSearchResults: React.Dispatch<React.SetStateAction<SearchPlaylistAPIResponse>>;
-    totalSongs: number | undefined;
     completePlaylistResponse: LoadCompletePlaylistAPIResponse;
 }
 
 function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Element {
-    const {playlistURL, showSnackbar, setSearchResults, totalSongs, completePlaylistResponse} = props;
+    const {playlistURL, showSnackbar, setSearchResults, completePlaylistResponse} = props;
 
     const [keywords, setKeywords] = React.useState<string>("");
+    // This state searches for songs individually and stores it in local state before updating to
+    // the parent state using setSearchResults
+    const [results, setResults] = React.useState<ScanSongAPIResponse["data"][]>([]);
 
 
     // While the request is in progress
@@ -39,7 +41,7 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
         return () => {
             setLoading(false);
         }
-    }, [])
+    }, []);
     
     
 
@@ -94,6 +96,71 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
 
     }
 
+    /* 
+    Instead of searching for ALL the songs in the server, send batch requests to scan songs 
+    */
+    const [songsSearched, setSongsSearched] = React.useState<number>(0);
+    const TotalSongsCount = completePlaylistResponse.data?.items.length as number;
+    React.useEffect(() => {
+        /* 
+        Since every songs are searched seperately, we need to identify when all the songs have been searched.
+        When all has been searched, stop loading, and update search results using setSearchResults
+        */
+        if (songsSearched === TotalSongsCount) {
+            setLoading(false);
+            showSnackbar({
+                message: "Found matches.",
+                severity: "success"
+            });
+            console.log(results);
+        }
+    }, [songsSearched]);
+
+    // The function which asynchronously searches all songs
+    function searchCompletePlaylist<T extends React.MouseEvent | React.KeyboardEvent>(event: T): void {
+        event.stopPropagation();
+        setLoading(true);
+        showSnackbar({
+            message: "Scanning playlist. This may take a while...",
+            severity: "info"
+        })
+
+
+        // Iterate through each song
+        completePlaylistResponse.data?.items.forEach((item) => {
+
+            // Generate endpoint with parameters
+            const parameters: QueryObject = {
+                songname: item.name,
+                artists: item.artists,
+                keywords: keywords
+            }
+            const _Q: string = _parseGetQueryToURLQuery(parameters);
+            const ENDPOINT: string = `${API_WEBSITE}${SCAN_SONG_ENDPOINT}?${_Q}`;
+            
+            fetch(ENDPOINT, {
+                method: "GET",
+                mode: "cors"
+            })
+            .then((resp) => resp.json())
+            .then((response: ScanSongAPIResponse) => {
+                /* 
+                A response status of i means:
+                    0   = No lyrics found
+                    200 = Lyrics found
+                    -1  = An error occured
+                */
+                if (response.status === 200) {
+                    // Lyrics found
+                    setResults((prevResults) => [...prevResults, response.data]);
+                }
+            })
+            .finally(() => {
+                setSongsSearched((v) => v+1);
+            })
+        });
+    }
+
     // Some styles
     const AppTheme = useTheme();
 
@@ -107,7 +174,7 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
         <Box>
             {/* Loader */}
             {
-                isLoading && (<EstimatedTimeRemaining totalSongs={totalSongs} />)
+                //isLoading && (<EstimatedTimeRemaining totalSongs={totalSongs} />)
             }
             
             {/* Search keywords */}
@@ -129,7 +196,7 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
                             <InputAdornment position='start'><SearchIcon/></InputAdornment>
                         )
                     }}
-                    onKeyDown={onEnter((e) => { searchPlaylist(e) })}
+                    onKeyDown={onEnter((e) => { searchCompletePlaylist(e) })}
                 />
             </Box>
             
@@ -149,7 +216,7 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
                     sx={SearchButtonStyle}
                     fullWidth
                     startIcon={<SearchIcon/>}
-                    onClick={searchPlaylist}
+                    onClick={searchCompletePlaylist}
                     disabled={isLoading}
                 >Search playlist</Button>
 
