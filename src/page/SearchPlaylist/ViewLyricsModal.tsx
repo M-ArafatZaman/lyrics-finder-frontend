@@ -56,7 +56,7 @@ function ViewLyricsModal(props: ViewLyricsModalProps) {
             })
             .then((response) => response.json())
             .then((response: GetLyricsAPIResponse) => {
-                if (response.status == 200 && typeof response.data != undefined) {
+                if (response.status === 200 && typeof response.data !== 'undefined') {
                     // Response was successfull
                     setLyrics(response.data?.lyrics);
                     setGeniusURL(response.data?.geniusURL);
@@ -134,8 +134,8 @@ function ViewLyricsModal(props: ViewLyricsModalProps) {
                 {isLyricsLoaded && <Box sx={{backgroundColor: "#E3E3E3", p: 1}}>
                     {
                         typeof lyrics === 'string' && lyrics.split("\n").map((e, i) => {
-                            if (e == "") {
-                                return <br/>
+                            if (e === "") {
+                                return <br key={i}/>
                             } else {
                                 return <Typography key={i}>{e}</Typography>
                             }
