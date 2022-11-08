@@ -12,11 +12,13 @@ import CloseIcon from '@mui/icons-material/Close';
 interface ViewLyricsModalProps {
     modal: boolean;
     setModal: React.Dispatch<React.SetStateAction<boolean>>;
+    songName: string;
+    artists: string;
 }
 
 function ViewLyricsModal(props: ViewLyricsModalProps) {
     
-    const {modal, setModal} = props;
+    const {modal, setModal, songName, artists} = props;
 
     // Handle close
     const handleClose = () => { setModal(false); };
@@ -26,6 +28,7 @@ function ViewLyricsModal(props: ViewLyricsModalProps) {
             open={modal}
             onClose={handleClose}
             fullWidth={true}
+            keepMounted={true}
             maxWidth="lg"
         >
             <Box sx={{p: 3}}>
@@ -41,8 +44,8 @@ function ViewLyricsModal(props: ViewLyricsModalProps) {
                  */}
                 <Divider sx={{mt: 1, mb: 2}} />
                 {/* Song name */}
-                {/* <Typography variant="h5" textAlign="center" sx={{my: 1}}>{name} - {artists}</Typography>
-                 */} 
+                <Typography variant="h5" textAlign="center" sx={{my: 1}}>{songName} - {artists}</Typography>
+                 
                 {/* Lyrics */}
                 {/* <Box sx={{backgroundColor: "#E3E3E3", p: 1}}>
                     {_LYRICS.map((eachLyrics, i) => {

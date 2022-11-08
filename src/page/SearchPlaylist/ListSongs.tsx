@@ -91,6 +91,8 @@ function ListSongs(props: ListSongsProps) {
                             <ViewLyricsModal
                                 modal={modal}
                                 setModal={setModal}
+                                songName={each.name}
+                                artists={each.artists}
                             />
 
                             <br/>
