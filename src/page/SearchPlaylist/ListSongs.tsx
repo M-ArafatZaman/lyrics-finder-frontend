@@ -71,26 +71,9 @@ function ListSongs(props: ListSongsProps) {
                                     Listen on Spotify
                                 </Button>
                             </Box>
-                            {/* View Lyrics button - opens a modal */}
-                            <Box>
-                                <Button
-                                    startIcon={<LyricsIcon />}
-                                    sx={{
-                                        backgroundColor: "#767676",
-                                        ":hover": {
-                                            backgroundColor: "#515151"
-                                        }
-                                    }}
-                                    color="primary"
-                                    variant="contained"
-                                    onClick={() => { setModal(true); }}
-                                >View lyrics</Button>
-                            </Box>
 
                             {/* View Lyrics component */}
                             <ViewLyricsModal
-                                modal={modal}
-                                setModal={setModal}
                                 songName={each.name}
                                 artists={each.artists}
                             />

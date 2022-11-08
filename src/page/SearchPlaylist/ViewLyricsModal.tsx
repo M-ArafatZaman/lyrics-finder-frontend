@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import CloseIcon from '@mui/icons-material/Close';
+import LyricsIcon from '@mui/icons-material/Lyrics';
 import Skeleton from '@mui/material/Skeleton';
 /* API imports */
 import { API_WEBSITE, GET_LYRICS_ENDPOINT } from './endpoints';
@@ -16,15 +17,16 @@ import _parseGetQueryToURLQuery, {QueryObject} from '../../utils/_parseGetQueryT
 
 // Function props
 interface ViewLyricsModalProps {
-    modal: boolean;
-    setModal: React.Dispatch<React.SetStateAction<boolean>>;
     songName: string;
     artists: string;
 }
 
 function ViewLyricsModal(props: ViewLyricsModalProps) {
     
-    const {modal, setModal, songName, artists} = props;
+    const {songName, artists} = props;
+
+    // The modal states 
+    const [modal, setModal] = useState<boolean>(false);
 
     /* When the component <ViewLyricsModal> is mounted initially don't do anything.
      * When the modal is opened, only then go and fetch the lyrics
@@ -75,6 +77,24 @@ function ViewLyricsModal(props: ViewLyricsModalProps) {
     const handleClose = () => { setModal(false); };
 
     return (
+        <>
+        {/* The view lyrics button to open the dialog */}
+        <Box>
+            <Button
+                startIcon={<LyricsIcon />}
+                sx={{
+                    backgroundColor: "#767676",
+                    ":hover": {
+                        backgroundColor: "#515151"
+                    }
+                }}
+                color="primary"
+                variant="contained"
+                onClick={() => { setModal(true); }}
+            >View lyrics</Button>
+        </Box>
+        
+        {/* The modal dialog */}
         <Dialog 
             open={modal}
             onClose={handleClose}
@@ -128,6 +148,8 @@ function ViewLyricsModal(props: ViewLyricsModalProps) {
                 
             </Box>
         </Dialog>
+
+        </>
     )
 };
 
