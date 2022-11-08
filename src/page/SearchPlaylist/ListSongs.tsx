@@ -13,7 +13,6 @@ import GREY from '@mui/material/colors/grey';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
-import LyricsIcon from '@mui/icons-material/Lyrics';
 import ViewLyricsModal from './ViewLyricsModal';
 
 // The list songs props types
@@ -29,7 +28,6 @@ function ListSongs(props: ListSongsProps) {
     */
     
     const {items} = props;
-    const [modal, setModal] = React.useState<boolean>(false);
 
     return (
         <Box my={1}>
