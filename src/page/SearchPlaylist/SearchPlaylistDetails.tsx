@@ -3,7 +3,7 @@ import {_parseGetQueryToURLQuery, QueryObject, onEnter} from '../../utils';
 import {API_WEBSITE, SEARCH_PLAYLIST_ENDPOINT, GET_GENIUS_RESPONSE_TIME, SCAN_SONG_ENDPOINT} from './endpoints';
 import {SnackbarStateInterface} from './index';
 import { useTheme, SxProps } from '@mui/material/styles';
-import { SearchPlaylistAPIResponse, LoadCompletePlaylistAPIResponse, ScanSongAPIResponse } from './api_response_types';
+import { SearchPlaylistAPIResponse, LoadCompletePlaylistAPIResponse, ScanSongAPIResponse, Track } from './api_response_types';
 // MUI components
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -30,7 +30,7 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
     const [keywords, setKeywords] = React.useState<string>("");
     // This state searches for songs individually and stores it in local state before updating to
     // the parent state using setSearchResults
-    const [results, setResults] = React.useState<ScanSongAPIResponse["data"][]>([]);
+    const [results, setResults] = React.useState<Track[]>([]);
 
 
     // While the request is in progress
@@ -112,7 +112,13 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
                 message: "Found matches.",
                 severity: "success"
             });
-            console.log(results);
+            
+            // Prepare and update global search results using setSearchResults
+            setSearchResults({
+                status: 200,
+                message: "Completed search.",
+                data: results
+            });
         }
     }, [songsSearched]);
 
@@ -150,9 +156,15 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
                     200 = Lyrics found
                     -1  = An error occured
                 */
-                if (response.status === 200) {
+                if (response.status === 200 && typeof response.data !== 'undefined') {
                     // Lyrics found
-                    setResults((prevResults) => [...prevResults, response.data]);
+                    const responseData: Track = {
+                        ...response.data,
+                        imageURL: item.imageURL,
+                        url: item.url,
+                        previewURL: "javascript:void(0);"
+                    }
+                    setResults((prevResults) => [...prevResults, responseData]);
                 }
             })
             .finally(() => {
