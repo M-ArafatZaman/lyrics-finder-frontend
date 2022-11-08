@@ -9,6 +9,7 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import CloseIcon from '@mui/icons-material/Close';
 import LyricsIcon from '@mui/icons-material/Lyrics';
 import Skeleton from '@mui/material/Skeleton';
+import Link from '@mui/material/Link';
 /* API imports */
 import { API_WEBSITE, GET_LYRICS_ENDPOINT } from './endpoints';
 import { GetLyricsAPIResponse } from './api_response_types';
@@ -109,9 +110,9 @@ function ViewLyricsModal(props: ViewLyricsModalProps) {
                     <Box flexGrow={1} />
                     <IconButton onClick={handleClose} ><CloseIcon/></IconButton>
                 </Box>
-                {/* 
-                <Typography variant="caption" color="textSecondary">Source: <Link href={geniusURL} target="_blank">Genius.com</Link></Typography>
-                 */}
+                 
+                {Boolean(geniusURL) && <Typography variant="caption" color="textSecondary">Source: <Link href={geniusURL} target="_blank">Genius.com</Link></Typography>}
+                
                 <Divider sx={{mt: 1, mb: 2}} />
                 {/* Song name */}
                 <Typography variant="h5" textAlign="center" sx={{my: 1}}>{songName} - {artists}</Typography>
