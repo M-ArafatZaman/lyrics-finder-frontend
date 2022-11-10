@@ -1,20 +1,17 @@
 import * as React from 'react';
 import {_parseGetQueryToURLQuery, QueryObject, onEnter} from '../../utils';
-import {API_WEBSITE, SEARCH_PLAYLIST_ENDPOINT, GET_GENIUS_RESPONSE_TIME, SCAN_SONG_ENDPOINT} from './endpoints';
+import {API_WEBSITE, SCAN_SONG_ENDPOINT} from './endpoints';
 import {SnackbarStateInterface} from './index';
 import { useTheme, SxProps } from '@mui/material/styles';
 import { SearchPlaylistAPIResponse, LoadCompletePlaylistAPIResponse, ScanSongAPIResponse, Track } from './api_response_types';
 // MUI components
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
-import LinearProgress from '@mui/material/LinearProgress';
 // Page components
-import EstimatedTimeRemaining from './EstimatedTimeRemaining';
 import ListSongs from './ListSongs';
 
 interface SearchPlaylistDetailsInterface {
@@ -43,58 +40,6 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
         }
     }, []);
     
-    
-
-    // Search playlist from endpoint
-    function searchPlaylist<T extends React.MouseEvent | React.KeyboardEvent>(event: T ): void {
-        event.stopPropagation();
-        setLoading(true);
-        showSnackbar({
-            message: "Scanning playlist. This may take a while...",
-            severity: "info"
-        })
-
-        const QUERY: QueryObject = {
-            url: playlistURL,
-            search: keywords
-        }
-        const _query: string = _parseGetQueryToURLQuery(QUERY);
-        const URL = `${API_WEBSITE}${SEARCH_PLAYLIST_ENDPOINT}?${_query}`;
-
-        // Send the request
-        fetch(URL, {
-            mode: "cors",
-            method: "GET"
-        })
-        .then(response => response.json())
-        .then(response => {
-            // Successfully received a response from server
-            if (response.status === 200) {
-                // Successfully received data
-                setSearchResults(response as SearchPlaylistAPIResponse)
-                showSnackbar({
-                    message: response.message,
-                    severity: "success"
-                })
-            } else {
-                showSnackbar({
-                    message: response.message,
-                    severity: "error"
-                })
-            }
-        })
-        .catch((e) => {
-            // Fetch was rejected/unable to connect to server
-            showSnackbar({
-                message: "Failed to connect to server",
-                severity: "error"
-            })
-        })
-        .finally(() => {
-            setLoading(false);
-        })
-
-    }
 
     /* 
     Instead of searching for ALL the songs in the server, send batch requests to scan songs 
