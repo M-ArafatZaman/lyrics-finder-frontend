@@ -25,6 +25,11 @@ interface LoadPlaylistProps {
  This is the LoadPlaylist step in the 3 steps
 */
 function LoadPlaylist(props: LoadPlaylistProps): JSX.Element {
+    /**
+     * This functional component is the first step of the SearchPlaylist process
+     * This component mainly serves the purpose of a very comprehensive TextField
+     * The TextField state is stored in the parent component. 
+     */
     const {playlistURL, setPlaylistURL, showSnackbar, setCompletePlaylistDetails} = props;
     
 
