@@ -38,11 +38,12 @@ interface ListContentProps {
     url: string;
     previewURL: string;
     geniusURL: string;
+    isLast: boolean;
 }
 
 function ListContent(props: ListContentProps): JSX.Element {
 
-    const {name, artists, lyrics, snippets, url, previewURL, geniusURL} = props;
+    const {name, artists, lyrics, snippets, url, previewURL, geniusURL, isLast} = props;
 
     // Inside each list content, every snippet is rendered using the <SnippetContent/> component
     const SnippetContent = (props: {keyword: string, snippet: string}): JSX.Element => {
@@ -125,6 +126,9 @@ function ListContent(props: ListContentProps): JSX.Element {
                     onClick={() => { setOpen(true) }}
                 >View lyrics</Button>
             </Box>
+            
+            
+            {!isLast && (<Divider sx={{mt: 1}} />)}
 
             {/* Dialog for lyrics */}
             <Dialog 
@@ -186,11 +190,12 @@ function SearchResults(props: SearchResultsInterface): JSX.Element {
             <List sx={{
                 width: "100%",
                 my: 1,
-                border: `1px solid ${grey["300"]}`
+                border: `1px solid ${grey["300"]}`,
+                py: 1
             }} disablePadding>
             {   
                 searchResults.data?.map((eachTrack, index) => (
-                    <ListItem alignItems="flex-start" key={index}>
+                    <ListItem alignItems="flex-start" key={index} sx={{py: 0}}>
                         {/* Image */}
                         <ListItemAvatar>
                             <Avatar alt="Album cover" src={eachTrack.imageURL} variant="square" />
@@ -205,6 +210,7 @@ function SearchResults(props: SearchResultsInterface): JSX.Element {
                                 url={eachTrack.url}
                                 previewURL={eachTrack.previewURL}
                                 geniusURL={eachTrack.geniusURL}
+                                isLast={(searchResults.data?.length as number) - 1 === (index)}
                             />
                         </ListItemText>
                     </ListItem>
