@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FadeInWrapper} from '../../utils';
-import {SearchPlaylistAPIResponse, LoadCompletePlaylistAPIResponse, ScanSongAPIResponse} from './api_response_types';
+import {SearchPlaylistAPIResponse, LoadCompletePlaylistAPIResponse} from './api_response_types';
 // MUI components
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -61,7 +61,6 @@ function SearchPlaylist(): JSX.Element {
 
     //  ========================== APP DATA ==================================
     const [PLAYLIST_URL, SET_PLAYLIST_URL] = useState<string>("");
-    //const [playlistDetails, setPlaylistDetails] = useState<LoadPlaylistAPIResponse>({} as LoadPlaylistAPIResponse);
     const [completePlaylistDetails, setCompletePlaylistDetails] = useState<LoadCompletePlaylistAPIResponse>(
         {} as LoadCompletePlaylistAPIResponse
     );
@@ -99,16 +98,14 @@ function SearchPlaylist(): JSX.Element {
     const [activeStep, setActiveStep] = useState<STEPS>(0);
     // stepStatus state contains the status (completed or not) of every step
     interface stepStatusInterface {
-        searchResults: boolean;
-        // Updated
-        loadCompletePlaylist: boolean;
+        loadCompletePlaylist: boolean; // Step 1
+        searchResults: boolean;        // Step 2
     }
     // This step status is for indicating the <Stepper/> content ONLY
     // Only activeStep is used for determing which content to render
     const [stepStatus, setStepStatus] = useState<stepStatusInterface>({
-        searchResults: false,
-        // Update
-        loadCompletePlaylist: false
+        loadCompletePlaylist: false,  // Step 1
+        searchResults: false          // Step 2
     });
 
     const isStepperContentInDisplay = (id: STEPS): boolean => activeStep == id;
@@ -137,10 +134,6 @@ function SearchPlaylist(): JSX.Element {
             setSearchResults({} as SearchPlaylistAPIResponse);
         }
     }
-
-
-    
-
 
     return (
         <Container>
