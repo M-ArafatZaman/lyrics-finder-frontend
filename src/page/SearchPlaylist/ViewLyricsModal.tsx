@@ -22,7 +22,12 @@ interface ViewLyricsModalProps {
     artists: string;
 }
 
-function ViewLyricsModal(props: ViewLyricsModalProps) {
+function ViewLyricsModal(props: ViewLyricsModalProps): JSX.Element {
+    /**
+     * This functional component is the ViewLyrics component for each song 
+     * It serves the purpose of using the fetch API to get the lyrics of songs
+     * ONLY when the modal is opened
+     */
     
     const {songName, artists} = props;
 
