@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {_parseGetQueryToURLQuery, QueryObject, onEnter} from '../../utils';
-import {API_WEBSITE, LOAD_PLAYLIST_ENDPOINT, LOAD_COMPLETE_PLAYLIST_ENDPOINT} from './endpoints';
+import {API_WEBSITE, LOAD_COMPLETE_PLAYLIST_ENDPOINT} from './endpoints';
 import {SnackbarStateInterface} from './index';
 import { useTheme, SxProps } from '@mui/material/styles';
 import { LoadCompletePlaylistAPIResponse } from './api_response_types';
@@ -65,7 +65,6 @@ function LoadPlaylist(props: LoadPlaylistProps): JSX.Element {
         // Convery query from an object to a url string
         const _query: string = _parseGetQueryToURLQuery(QUERY);
         
-        //const URL = `${API_WEBSITE}${LOAD_PLAYLIST_ENDPOINT}?${_query}`;
         const URL = `${API_WEBSITE}${LOAD_COMPLETE_PLAYLIST_ENDPOINT}?${_query}`;
 
         // Send the fetch request
@@ -78,7 +77,6 @@ function LoadPlaylist(props: LoadPlaylistProps): JSX.Element {
             // Successfully received a response from server
             if (response.status === 200) {
                 // Successfully received data
-                //setPlaylistDetails(response as LoadPlaylistAPIResponse);
                 setCompletePlaylistDetails(response as LoadCompletePlaylistAPIResponse);
                 showSnackbar({
                     message: response.message,
