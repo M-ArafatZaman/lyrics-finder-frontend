@@ -7,6 +7,7 @@ import { SearchPlaylistAPIResponse, Track, Snippet } from './api_response_types'
 import replaceStringWithContent, {ReplacedContentOutputType} from '../../utils/reactStringReplace';
 // MUI components
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import {grey} from '@mui/material/colors';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -87,14 +88,19 @@ function ListContent(props: ListContentProps): JSX.Element {
             {/* Song name and artist name */}
             <Typography>{name}</Typography>
             <Typography variant="body2" color="textSecondary">{artists}</Typography>
-            <Divider sx={{my: 1}} />
+            
             {/* Snippets */}
-            <React.Fragment>
+            <Paper sx={{
+                my: 1,
+                py: 1,
+                px: 2,
+                display: "inline-block"
+            }}>
                 {snippets.map((eachSnippet, index) => (
                     <SnippetContent key={index} keyword={eachSnippet.keyword} snippet={eachSnippet.snippet} />
                 ))}
-            </React.Fragment>
-            <Divider sx={{my: 1}} />
+            </Paper>
+            
             {/* Links */}
             <Box sx={{mb: 1}}>
                 {/* Spotify link */}
