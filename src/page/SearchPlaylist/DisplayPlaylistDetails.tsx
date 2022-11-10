@@ -15,8 +15,11 @@ interface DisplayPlaylistDetailsInterface {
 }
 
 function DisplayPlaylistDetails(props: DisplayPlaylistDetailsInterface): JSX.Element {
-    const {completePlaylistDetails} = props;
+    /**
+     * This function contains some playlist details that is displayed in step 2 and 3
+     */
 
+    const {completePlaylistDetails} = props;
 
     let playlistImage: string, playlistExternalSpotifyURL: string, playlistName: string, playlistDescription: string, playlistOwnerName: string, playlistOwnerURL: string, playlistFollowers: number, playlistSongs: number, playlistOwnerImages: {url: string}[];
 
