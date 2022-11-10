@@ -14,9 +14,6 @@ import StepLabel from '@mui/material/StepLabel';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import CicularProgress from '@mui/material/CircularProgress';
 // Page components
 import Navigation from './Navigation';
 import LoadPlaylist from './LoadPlaylist';
@@ -33,6 +30,7 @@ export interface SnackbarStateInterface {
 }
 
 function SearchPlaylist(): JSX.Element {
+    /* This functional component is the main parent component in the search-playlist page */
 
     // ============================= SNACKBAR FUNCTIONS=================
     // Snackbar states and detail for displaying messages from the server
@@ -90,7 +88,6 @@ function SearchPlaylist(): JSX.Element {
             } as stepStatusInterface);
         }
     }, [searchResults]);
- 
     
 
     // ============================ Stepper functions =======================
