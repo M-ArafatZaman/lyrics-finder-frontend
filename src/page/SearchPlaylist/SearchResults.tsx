@@ -1,10 +1,7 @@
 import * as React from 'react';
-import {_parseGetQueryToURLQuery, QueryObject, onEnter} from '../../utils';
-import {API_WEBSITE, SEARCH_PLAYLIST_ENDPOINT} from './endpoints';
-import {SnackbarStateInterface} from './index';
-import { useTheme, SxProps } from '@mui/material/styles';
-import { SearchPlaylistAPIResponse, Track, Snippet } from './api_response_types';
-import replaceStringWithContent, {ReplacedContentOutputType} from '../../utils/reactStringReplace';
+import {_parseGetQueryToURLQuery} from '../../utils';
+import { SearchPlaylistAPIResponse, Snippet } from './api_response_types';
+import SnippetContent from './SnippetContent';
 // MUI components
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -23,12 +20,7 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import LinearProgress from '@mui/material/LinearProgress';
 
 // ListContent Component
 interface ListContentProps {
@@ -43,45 +35,14 @@ interface ListContentProps {
 }
 
 function ListContent(props: ListContentProps): JSX.Element {
+    /* This functional component is used by SearchResults to display each item */
 
     const {name, artists, lyrics, snippets, url, previewURL, geniusURL, isLast} = props;
-
-    // Inside each list content, every snippet is rendered using the <SnippetContent/> component
-    const SnippetContent = (props: {keyword: string, snippet: string}): JSX.Element => {
-
-        const {keyword, snippet} = props;
-
-        // Replace \n with lines, and replace the keyword in each string line with a span tag
-        let _lines = replaceStringWithContent(snippet, "\n", () => <br/>);
-        let _FinalSnippet: ReplacedContentOutputType[] = [];
-        // Iterate thru each lines
-        for (let i in _lines) {
-            // Only replace for keyword if the current element is a string
-            if (typeof _lines[i] === "string") {
-                // Replace 
-                const ReplacedContent = replaceStringWithContent(_lines[i] as string, new RegExp(keyword, "gi"), (match) => <span style={{textDecoration: "underline"}}>{match}</span>);
-                // Add on to final snippet
-                _FinalSnippet = _FinalSnippet.concat( ReplacedContent );
-            } else {
-                _FinalSnippet[_FinalSnippet.length] = _lines[i]
-            }
-        }
-
-        return (
-            <Typography color="textSecondary" sx={{fontStyle: "italic"}} fontSize={14}>
-                "{_FinalSnippet.map((each, i) => <React.Fragment key={i}>{each}</React.Fragment>)}"
-            </Typography>
-        )
-    }
 
     // Lyrics and dialog functions
     const [open, setOpen] = React.useState<boolean>(false);
     const handleClose = () => { setOpen(false); };
     const _LYRICS = lyrics.split("\n");
-    const LyricsLineStyle: SxProps = {
-        backgroundColor: ""
-    }
-    
 
     return (
         <React.Fragment>
@@ -185,11 +146,8 @@ interface SearchResultsInterface {
 }
 
 function SearchResults(props: SearchResultsInterface): JSX.Element {
+    /* This functional component displays all the result from the fetch API from the prev step */
     const {searchResults} = props;
-
-    // Some styles
-    const AppTheme = useTheme();
-
 
     return (
         <Box>
@@ -223,7 +181,6 @@ function SearchResults(props: SearchResultsInterface): JSX.Element {
                 ))
             }
             </List>
-
 
         </Box>
     )
