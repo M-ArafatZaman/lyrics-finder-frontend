@@ -3,6 +3,8 @@ import {_parseGetQueryToURLQuery} from '../../utils';
 import { SearchPlaylistAPIResponse, Snippet } from './api_response_types';
 import SnippetContent from './SnippetContent';
 // MUI components
+import {SxProps} from '@mui/material/styles';
+import GREEN from '@mui/material/colors/green';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import {grey} from '@mui/material/colors';
@@ -44,6 +46,13 @@ function ListContent(props: ListContentProps): JSX.Element {
     const handleClose = () => { setOpen(false); };
     const _LYRICS = lyrics.split("\n");
 
+    // Snippet Container style
+    const SnippetContainerStyle: SxProps = {
+        my: 1, py: 1, px: 2,
+        display: "inline-block",
+        borderLeft: `4px solid ${GREEN["A700"]}`
+    };
+
     return (
         <React.Fragment>
             {/* Song name and artist name */}
@@ -51,12 +60,7 @@ function ListContent(props: ListContentProps): JSX.Element {
             <Typography variant="body2" color="textSecondary">{artists}</Typography>
             
             {/* Snippets */}
-            <Paper sx={{
-                my: 1,
-                py: 1,
-                px: 2,
-                display: "inline-block"
-            }}>
+            <Paper sx={SnippetContainerStyle}>
                 {snippets.map((eachSnippet, index) => (
                     <SnippetContent key={index} keyword={eachSnippet.keyword} snippet={eachSnippet.snippet} />
                 ))}
