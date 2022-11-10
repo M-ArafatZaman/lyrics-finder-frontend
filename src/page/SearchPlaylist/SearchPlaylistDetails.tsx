@@ -22,6 +22,11 @@ interface SearchPlaylistDetailsInterface {
 }
 
 function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Element {
+    /** 
+     * This is the second step of the searchPlaylist process
+     * This component mainly serves the purpose of using fetch API to SCAN SONGS. 
+     */
+
     const {playlistURL, showSnackbar, setSearchResults, completePlaylistResponse} = props;
 
     const [keywords, setKeywords] = React.useState<string>("");
