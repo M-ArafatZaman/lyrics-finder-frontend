@@ -34,13 +34,14 @@ function ListSongs(props: ListSongsProps) {
             <List
                 sx={{
                     width: "100%",
-                    border: `1px solid ${GREY["300"]}`
+                    border: `1px solid ${GREY["300"]}`,
+                    py: 1
                 }}
                 disablePadding
             >
             {
                 items.map((each, i) => (
-                    <ListItem alignItems="flex-start" key={i}>
+                    <ListItem alignItems="flex-start" key={i} sx={{py: 0}}>
                         {/* Avatar */}
                         <ListItemAvatar>
                             <Avatar alt="Song cover photo" src={each.imageURL} variant="square" />
@@ -50,10 +51,10 @@ function ListSongs(props: ListSongsProps) {
                             <>
                             <Typography>{each.name}</Typography>
                             <Typography variant="body2" color="textSecondary">{each.artists}</Typography>
-                            <br/>
+                            
                             {/* Buttons */}
                             {/* Listen to spotify button */}
-                            <Box mb={1}>
+                            <Box my={1}>
                                 <Button
                                     startIcon={<Icon className="fab fa-spotify" />}
                                     sx={{
@@ -76,8 +77,8 @@ function ListSongs(props: ListSongsProps) {
                                 artists={each.artists}
                             />
 
-                            <br/>
-                            {(i !== (items.length-1) && <Divider sx={{mt: 1}} />)}
+                            
+                            {(i !== (items.length-1) && <Divider sx={{mt: 2}} />)}
                             </>
                         </ListItemText>
                     </ListItem>
