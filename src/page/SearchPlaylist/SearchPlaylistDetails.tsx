@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 // Page components
 import ListSongs from './ListSongs';
+import EstimatedTimeRemaining from './EstimatedTimeRemaining';
 
 interface SearchPlaylistDetailsInterface {
     playlistURL: string;
@@ -164,7 +165,7 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
         <Box>
             {/* Loader */}
             {
-                //isLoading && (<EstimatedTimeRemaining totalSongs={totalSongs} />)
+                isLoading && (<EstimatedTimeRemaining value={(songsSearched/TotalSongsCount)*100} />)
             }
             
             {/* Search keywords */}
