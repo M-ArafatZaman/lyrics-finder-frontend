@@ -6,14 +6,13 @@ import { useTheme, SxProps } from '@mui/material/styles';
 import { SearchPlaylistAPIResponse, LoadCompletePlaylistAPIResponse, ScanSongAPIResponse, Track } from './api_response_types';
 // MUI components
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 // Page components
 import ListSongs from './ListSongs';
 import EstimatedTimeRemaining from './EstimatedTimeRemaining';
+import SearchKeywordsTextField from './SearchKeywords';
 
 interface SearchPlaylistDetailsInterface {
     playlistURL: string;
@@ -170,24 +169,9 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
             
             {/* Search keywords */}
             <Box my={2}>
-                <TextField
-                    value={keywords}
-                    onChange={(e) => setKeywords(e.target.value)}
-                    placeholder="Search lyrics"
-                    fullWidth
-                    sx={{
-                        my: 2,
-                        '& .MuiOutlinedInput-root': {
-                            borderRadius: 8,
-                            paddingLeft: 2
-                        }
-                    }}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position='start'><SearchIcon/></InputAdornment>
-                        )
-                    }}
-                    onKeyDown={onEnter((e) => { searchCompletePlaylist(e) })}
+                <SearchKeywordsTextField
+                    setKeyword={setKeywords}
+                    searchPlaylist={searchCompletePlaylist}
                 />
             </Box>
             
