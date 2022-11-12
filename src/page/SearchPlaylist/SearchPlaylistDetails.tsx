@@ -65,19 +65,21 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
                     message: "Found matches.",
                     severity: "success"
                 });
+                
+                // Only update global results, if there are atleast one matches
+                // Prepare and update global search results using setSearchResults
+                setSearchResults({
+                    status: 200,
+                    message: "Completed search.",
+                    data: results
+                });
             } else {
                 showSnackbar({
                     message: "No matches found.",
                     severity: "error"
                 })
             }
-            
-            // Prepare and update global search results using setSearchResults
-            setSearchResults({
-                status: 200,
-                message: "Completed search.",
-                data: results
-            });
+        
         }
     }, [songsSearched]);
 
@@ -94,7 +96,7 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
             return;
         }
 
-
+        // Start fetching
         setLoading(true);
         showSnackbar({
             message: "Scanning playlist. This may take a while...",
