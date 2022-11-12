@@ -117,6 +117,12 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
                     setResults((prevResults) => [...prevResults, responseData]);
                 }
             })
+            .catch((e) => {
+                showSnackbar({
+                    severity: "error",
+                    message: `An unknown error occured while scanning ${parameters.songname} - ${parameters.artists}`
+                });
+            })
             .finally(() => {
                 setSongsSearched((v) => v+1);
             })
