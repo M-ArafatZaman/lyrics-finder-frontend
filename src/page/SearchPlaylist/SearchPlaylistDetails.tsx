@@ -58,10 +58,19 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
         */
         if (songsSearched === TotalSongsCount) {
             setLoading(false);
-            showSnackbar({
-                message: "Found matches.",
-                severity: "success"
-            });
+
+            // Only show success snackbar if atleast 1 song is matched, else show no matches found
+            if (results.length > 0) {
+                showSnackbar({
+                    message: "Found matches.",
+                    severity: "success"
+                });
+            } else {
+                showSnackbar({
+                    message: "No matches found.",
+                    severity: "error"
+                })
+            }
             
             // Prepare and update global search results using setSearchResults
             setSearchResults({
