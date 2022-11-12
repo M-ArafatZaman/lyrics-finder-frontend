@@ -84,6 +84,17 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
     // The function which asynchronously searches all songs
     function searchCompletePlaylist<T extends React.MouseEvent | React.KeyboardEvent>(event: T): void {
         event.stopPropagation();
+
+        // Show an error if keywords is empty
+        if (keywords === "") {
+            showSnackbar({
+                message: "Please enter a valid keyword",
+                severity: "info"
+            });
+            return;
+        }
+
+
         setLoading(true);
         showSnackbar({
             message: "Scanning playlist. This may take a while...",
