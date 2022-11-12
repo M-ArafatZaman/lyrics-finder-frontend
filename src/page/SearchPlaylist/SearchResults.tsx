@@ -126,7 +126,7 @@ function ListContent(props: ListContentProps): JSX.Element {
                     <Box sx={{backgroundColor: "#E3E3E3", p: 1}}>
                         {_LYRICS.map((eachLyrics, i) => {
                             if (eachLyrics === "") {
-                                return <br/>
+                                return <br key={i}/>
                             } else {
                                 return <Typography key={i}>{eachLyrics}</Typography>
                             }
