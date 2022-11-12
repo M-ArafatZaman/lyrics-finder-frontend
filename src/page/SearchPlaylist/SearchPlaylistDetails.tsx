@@ -29,7 +29,6 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
 
     const {playlistURL, showSnackbar, setSearchResults, completePlaylistResponse} = props;
 
-    const [keywords, setKeywords] = React.useState<string>("");
     // This state searches for songs individually and stores it in local state before updating to
     // the parent state using setSearchResults
     const [results, setResults] = React.useState<Track[]>([]);
@@ -86,6 +85,10 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
     // The function which asynchronously searches all songs
     function searchCompletePlaylist<T extends React.MouseEvent | React.KeyboardEvent>(event: T): void {
         event.stopPropagation();
+
+        // Get keywords
+        const SEARCHBAR_TEXTFIELD: HTMLInputElement = document.getElementById("search-keywords-TextField") as HTMLInputElement;
+        const keywords: string = SEARCHBAR_TEXTFIELD.value;
 
         // Show an error if keywords is empty
         if (keywords === "") {
@@ -169,10 +172,7 @@ function SearchPlaylistDetails(props: SearchPlaylistDetailsInterface): JSX.Eleme
             
             {/* Search keywords */}
             <Box my={2}>
-                <SearchKeywordsTextField
-                    setKeyword={setKeywords}
-                    searchPlaylist={searchCompletePlaylist}
-                />
+                <SearchKeywordsTextField searchPlaylist={searchCompletePlaylist}/>
             </Box>
             
             {/* List of songs */}

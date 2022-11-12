@@ -6,7 +6,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import {onEnter} from '../../utils';
 
 interface SearchKeywordsProps {
-    setKeyword: React.Dispatch<React.SetStateAction<string>>;
     searchPlaylist: <T extends React.MouseEvent | React.KeyboardEvent>(event: T) => void;
 };
 
@@ -17,13 +16,10 @@ function SearchKeywords(props: SearchKeywordsProps): JSX.Element {
     // Which can be very expensive to re render
     
     // Props from parent component
-    const {setKeyword, searchPlaylist} = props;
- 
-    const [data, setData] = useState<string>("");
+    const {searchPlaylist} = props;
 
     return (
         <TextField
-            value={data}
             placeholder="Search lyrics"
             fullWidth
             sx={{
@@ -38,10 +34,9 @@ function SearchKeywords(props: SearchKeywordsProps): JSX.Element {
                     <InputAdornment position='start'><SearchIcon/></InputAdornment>
                 )
             }}
-            onChange={(e) => setData(e.target.value)}
+            id="search-keywords-TextField"
             onKeyDown={onEnter((e) => {
                 // Update parent keywords
-                setKeyword(data);
                 searchPlaylist(e);
             })}
         />
