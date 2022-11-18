@@ -9,3 +9,8 @@ You can try out the app [here](https://lyrics-finder-02nb.onrender.com/)
 
 ### Home page
 ![Home page](/docs/LyricsFinder/1_Home.png)
+
+---
+
+### Search playlist
+![Load playlist](/docs/LyricsFinder//2_LoadPlaylist.png) 
