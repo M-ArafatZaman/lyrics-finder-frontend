@@ -18,3 +18,7 @@ You can try out the app [here](https://lyrics-finder-02nb.onrender.com/)
 ![Search playlist](/docs/LyricsFinder/3_SearchPlaylist.png)
 
 ![Lyrics](/docs/LyricsFinder/5_Lyrics.png)
+
+---
+### Search results
+![Search results](/docs/LyricsFinder/7_SearchResults.png)
