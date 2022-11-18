@@ -14,3 +14,5 @@ You can try out the app [here](https://lyrics-finder-02nb.onrender.com/)
 
 ### Search playlist
 ![Load playlist](/docs/LyricsFinder//2_LoadPlaylist.png) 
+
+![Search playlist](/docs/LyricsFinder/3_SearchPlaylist.png)
